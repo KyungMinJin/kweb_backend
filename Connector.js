@@ -3,11 +3,9 @@ const pool = mariadb.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'mysql',
   connectionLimit: 5
 });
 async function asyncFunction() {
-  console.log('start');
   let conn;
   try {
     conn = await pool.getConnection();
@@ -24,3 +22,4 @@ async function asyncFunction() {
     if (conn) return conn.end();
   }
 }
+asyncFunction();
