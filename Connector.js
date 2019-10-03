@@ -2,8 +2,8 @@ const mariadb = require('mariadb');
 const pool = mariadb.createPool({
   host: 'localhost',
   user: 'root',
-  password: '',
-  database: 'mysql',
+  password: 'root',
+  database: 'testdb',
   connectionLimit: 5
 });
 async function asyncFunction() {
@@ -24,3 +24,4 @@ async function asyncFunction() {
     if (conn) return conn.end();
   }
 }
+asyncFunction();
