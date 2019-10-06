@@ -1,17 +1,21 @@
 const mariadb = require('mariadb');
+
 const pool = mariadb.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
+  database: 'myDb',
   connectionLimit: 5
 });
+
 async function asyncFunction() {
+  console.log('start');
   let conn;
   try {
     conn = await pool.getConnection();
-    const rows = await conn.query('SELECT 1 as val');
+    const rows = await conn.query('SELECT 1 AS val');
     console.log(rows); //[ {val: 1}, meta: ... ]
-    const res = await conn.query('INSERT INTO myTable value (?, ?)', [
+    const res = await conn.query('INSERT INTO myTable VALUES (?, ?)', [
       1,
       'mariadb'
     ]);
@@ -22,4 +26,5 @@ async function asyncFunction() {
     if (conn) return conn.end();
   }
 }
+
 asyncFunction();
