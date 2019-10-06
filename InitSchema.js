@@ -3,7 +3,7 @@ const pool = mariadb.createPool
 ({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'gudrms63',
     connectionLimit: 5
 });
 
@@ -23,4 +23,4 @@ async function asyncFunction() {
       if (conn) return conn.end();
     }
 }
-asyncFunction();
+asyncFunction(); 
