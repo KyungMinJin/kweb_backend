@@ -57,5 +57,3 @@ async function createKWEBDB()
     }
 }
 createKWEBDB();
-
-process.exit
