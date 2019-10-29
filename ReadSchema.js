@@ -1,4 +1,7 @@
 const mariadb = require('mariadb');
+
+let ex = module.exports = {};
+
 const pool = mariadb.createPool
 ({
     host: 'localhost',
@@ -7,24 +10,42 @@ const pool = mariadb.createPool
     connectionLimit: 5
 });
 
-async function readKWEBDB()
+let readKWEBDB;
+ex.readKWEBDB = readKWEBDB = async function(table)
 {
-    let conn, code;
+    let conn, code, result;
     try
     {
+        table = await table.toString();
+        if(!(table === "board" || table === "member"))
+            return new Promise((resolve, reject)=>{
+                if(!result)
+                    reject(new Error("Error occured"));
+                resolve(result);
+            });
         conn = await pool.getConnection();
         await conn.query("use kweb;");
-        code = 0;
+        result = await conn.query("select * from " + table);
+        console.log("result length : " + result.length);
     }
     catch (err)
     {
-        code = 1
+        throw err;
     }
     finally
     {
         if (conn) 
         {
-            return await conn.end();
+            await conn.end();
+            return new Promise((resolve, reject)=>{
+                if(!result)
+                    reject(new Error("Error occured"));
+                resolve(result);
+            });
         }
     }
 }
+
+readKWEBDB("board").then((res) => {console.log(res[0]);});
+readKWEBDB("member").then((res) => {console.log(res[0]);});
+readKWEBDB("member2").then((res) => {console.log(res[0]);});
