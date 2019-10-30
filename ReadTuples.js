@@ -10,10 +10,10 @@ const pool = mariadb.createPool
     connectionLimit: 5
 });
 
-let readKWEBDB;
-ex.readKWEBDB = readKWEBDB = async function(table)
+let read;
+ex.read = read = async function(table)
 {
-    let conn, code, result;
+    let conn, result;
     try
     {
         table = await table.toString();
@@ -46,6 +46,6 @@ ex.readKWEBDB = readKWEBDB = async function(table)
     }
 }
 
-readKWEBDB("board").then((res) => {console.log(res[0]);});
-readKWEBDB("member").then((res) => {console.log(res[0]);});
-readKWEBDB("member2").then((res) => {console.log(res[0]);});
+read("board").then((res) => {console.log(res[0]);});
+read("member").then((res) => {console.log(res[0]);});
+read("member2").then((res) => {console.log(res[0]);});
