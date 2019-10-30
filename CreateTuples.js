@@ -10,6 +10,9 @@ const pool = mariadb.createPool
     connectionLimit: 5
 });
 
+//리턴값
+//성공시 : { affectedRows: 1, insertId: 0, warningStatus: 0 }
+//실패시 : undefined
 let create;
 ex.create = create = async function(table, tuple)
 {
@@ -59,12 +62,17 @@ ex.create = create = async function(table, tuple)
     }
 }
 
-//read("board").then((res) => {console.log(res[0]);});
 const someTuple = {};
-someTuple.id = "myid"
+//SQL injection test
+//someTuple.id = "myid\'; insert into member values (\"fake\"," + 
+//    "\"ED64384640CF857A66AB2888E3C9C4CED13B4C812BCBBDFAE7C61E83098C62E8\", 0," + 
+//    "\"root@root.com\", \"fakename\", \"00011112222\");"
+someTuple.id = "anotherid"
 someTuple.password = "ED64384640CF857A66AB2888E3C9C4CED13B4C812BCBBDFAE7C61E83098C62E8" //kweb
 someTuple.class = 1;
-someTuple.email = "email@naver.com"
+//someTuple.email = "e@n.c\",\"noname\"";
+someTuple.email = "email@naver.com";
+//someTuple.name = ";describe member;";
 someTuple.name = "tangtang";
 someTuple.phone_number = "01011112222";
 create("member", someTuple).then((res) => {console.log(res);});
