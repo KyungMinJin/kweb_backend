@@ -1,0 +1,115 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: KWEB
+  
+host: localhost
+basePath: /api
+
+schemes: 
+  - https
+  
+consumes: 
+  - application/json
+produces:
+  - application/json
+  
+paths:
+  /Member:
+    post:
+      tags:
+      - Member
+      summary: create
+      description: pass table name and data set for create row
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: request
+        description: json includes table name and data set
+        schema:
+          $ref: '#/definitions/member'
+      responses:
+        200:
+          description: insert done
+        400:
+          description: bad input parameter
+          
+definitions:
+  member:
+    type: object
+    required: 
+    - table_name
+    - data
+    properties:
+      table_name:
+        $ref: '#/definitions/table'
+      data:
+        $ref: '#/definitions/member_data'
+  table:
+    type: string
+  data:
+    required:
+      - member_data
+      - board_data
+    properties:
+      member_data:
+        $ref: '#/definitions/member_data'
+      board_data:
+        $ref: '#/definitions/board_data'
+  member_data:
+    type: object
+    required: 
+    - id
+    - password
+    - class
+    - email
+    - name
+    - phone_number
+    properties:
+      id:
+        type: string
+        example: myid
+      password:
+        type: string
+        example: mypassword
+      class:
+        type: integer
+        example: 0
+      email:
+        type: string
+        example: asdf1234@naver.com
+      name:
+        type: string
+        example: myname
+      phone_number:
+        type: string
+        example: 01044444444
+  board_data:
+    type: object
+    required: 
+      - board_id
+      - board_class
+      - title
+      - content
+      - time
+      - id
+    properties:
+      board_id:
+        type: integer
+        example: 0
+      board_class:
+        type: integer
+        example: 0
+      title:
+        type: string
+        example: asdf
+      content:
+        type: string
+        example: as.bo
+      time:
+        type: string
+        format: date-time
+      id:
+        type: string
+        example: myid
