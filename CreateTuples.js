@@ -75,4 +75,4 @@ someTuple.email = "email@naver.com";
 //someTuple.name = ";describe member;";
 someTuple.name = "tangtang";
 someTuple.phone_number = "01011112222";
-create("member", someTuple).then((res) => {console.log(res);});
+////create("member", someTuple).then((res) => {console.log(res);});

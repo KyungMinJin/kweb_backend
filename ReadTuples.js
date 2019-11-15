@@ -46,6 +46,6 @@ ex.read = read = async function(table)
     }
 }
 
-read("board").then((res) => {console.log(res[0]);});
-read("member").then((res) => {console.log(res[0]);});
-read("member2").then((res) => {console.log(res[0]);});
+////read("board").then((res) => {console.log(res[0]);});
+////read("member").then((res) => {console.log(res[0]);});
+////read("member2").then((res) => {console.log(res[0]);});
