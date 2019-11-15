@@ -37,12 +37,9 @@ ex.create = create = async function(table, tuple)
         console.log(values);
         conn = await pool.getConnection();
         await conn.query("use kweb;");
-        console.log("use kweb");
-        if(table === "member" || table === "board")
-        {
-            result = await conn.query("insert into " + table + " values ?", [values]);
-            console.log("insert done");
-        }
+
+        result = await conn.query("insert into " + table + " values ?", [values]);
+        console.log("insert done");
     }
     catch (err)
     {
