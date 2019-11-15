@@ -23,7 +23,7 @@ ex.create = create = async function(table, tuple)
     try
     {
         const values = [];
-        if(!(table == "member" || table == "board"))
+        if(!(table === "member" || table === "board"))
             throw new Error("no table");
         for (const att of tables[table]) {
             if(!tuple[att])
@@ -38,9 +38,9 @@ ex.create = create = async function(table, tuple)
         conn = await pool.getConnection();
         await conn.query("use kweb;");
         console.log("use kweb");
-        if(table == "member")
+        if(table === "member" || table === "board")
         {
-            result = await conn.query("insert into member values ?", [values]);
+            result = await conn.query("insert into " + table + " values ?", [values]);
             console.log("insert done");
         }
     }
