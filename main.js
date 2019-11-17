@@ -30,9 +30,6 @@ app.post("/member", (req, res) =>
         return;
     }
     selectTuple["id"] = id;
-    // 이미 있는 id인지 체크
-    // 미구현
-    // read("member", selectTuple);
 
     let tuple = req.body;
     // 필수 정보 사항이 있는지 체크(password)
@@ -41,17 +38,37 @@ app.post("/member", (req, res) =>
         res.send("There is no password");
         return;
     }
-    // 서버에서만 권한을 정회원 이상으로 줄 수 있다고 가정함
-    // 원격으로는 준회원이 한계
-    // (준, 정회원, 관리자(임원))(2, 1, 0)
-    tuple.class = 2;
-    // 비밀번호 해쉬
-    tuple.password = crypto.createHash("sha256").update(tuple.password).digest("base64");
-    //테스트
-    console.log(tuple);
-    CreateTuples.create("member", tuple);
+    // 이미 있는 id인지 체크
+    // 미구현
+    let readTuple;
+    ReadTuples.read("member", selectTuple)
+    .then((result)=>
+    {
+        readTuple = result;
+        if(readTuple.length > 0)
+        {
+            res.send("This id is already exist");
+            return;
+        }
+        return;
+    })
+    .then(()=>
+    {
+        // 서버에서만 권한을 정회원 이상으로 줄 수 있다고 가정함
+        // 원격으로는 준회원이 한계
+        // (준, 정회원, 관리자(임원))(2, 1, 0)
+        tuple.class = 2;
+        // 비밀번호 해쉬
+        tuple.password = crypto.createHash("sha256").update(tuple.password).digest("base64");
+        //테스트
+        console.log(tuple);
+        CreateTuples.create("member", tuple);
 
-    res.send("Member Post complete");
+        res.send("Member Post complete");
+        return;
+    });
+
+    
 });
 
 app.listen(port, () => console.log(`DB API Routing start..`));
