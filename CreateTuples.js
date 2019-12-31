@@ -33,13 +33,13 @@ ex.create = create = async function(table, tuple)
             }
             values.push(tuple[att]);
         }
-        console.log("push done, values : ");
-        console.log(values);
+        //console.log("push done, values : ");
+        //console.log(values);
         conn = await pool.getConnection();
         await conn.query("use kweb;");
 
         result = await conn.query("insert into " + table + " values ?", [values]);
-        console.log("insert done");
+        //console.log("insert done");
     }
     catch (err)
     {
