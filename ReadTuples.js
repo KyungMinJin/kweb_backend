@@ -31,7 +31,7 @@ ex.read = read = async function(table, tuple)
             readQuery += "and " + att + "=? "
             values.push(tuple[att]);
         }
-        console.log(readQuery);
+        //console.log(readQuery);
         conn = await pool.getConnection();
         await conn.query("use kweb;");
 

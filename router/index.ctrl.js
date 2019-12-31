@@ -32,7 +32,6 @@ exports.signUp = (req, res) =>
         return;
     }
     // 이미 있는 id인지 체크
-    // 미구현
     let readTuple;
     ReadTuples.read("member", selectTuple)
     .then((result)=>
@@ -43,10 +42,6 @@ exports.signUp = (req, res) =>
             res.send("This id is already exist");
             return;
         }
-        return;
-    })
-    .then(()=>
-    {
         // 서버에서만 권한을 정회원 이상으로 줄 수 있다고 가정함
         // 원격으로는 준회원이 한계
         // (준, 정회원, 관리자(임원))(2, 1, 0)
@@ -59,5 +54,5 @@ exports.signUp = (req, res) =>
 
         res.send("Member Post complete");
         return;
-    });
+    })
 };
