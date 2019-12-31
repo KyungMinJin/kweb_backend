@@ -5,7 +5,7 @@ let ex = (module.exports = {});
 const pool = mariadb.createPool({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'root',
   connectionLimit: 5
 });
 
@@ -93,6 +93,7 @@ someTuple.email = 'b@naver.com';
 //someTuple.name = ";describe member;";
 someTuple.name = 'bbbb';
 someTuple.phone_number = 'bbbb';
+/*
 update('member', someTuple).then(res => {
   console.log(res);
-});
+});*/
